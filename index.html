@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kripton | The Future of Decentralized Trading</title>
+    <meta name="description" content="Trade crypto with zero fees. Lightning fast execution, bank-grade security, and 24/7 support.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        dark: {
+                            900: '#050505',
+                            800: '#0a0a0a',
+                            700: '#121212',
+                            600: '#1a1a1a',
+                        },
+                        neon: {
+                            purple: '#b026ff',
+                            blue: '#4c1d95',
+                            cyan: '#00f3ff',
+                            pink: '#ff00ff',
+                            green: '#00ff9d',
+                            yellow: '#ffcc00'
+                        }
+                    },
+                    backgroundImage: {
+                        'cyber-grid': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gradient-conic': 'conic-gradient(var(--tw-gradient-stops))',
+                        'gradient-diagonal': 'linear-gradient(45deg, var(--tw-gradient-stops))',
+                    },
+                    animation: {
+                        'ticker': 'ticker 30s linear infinite',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'float-slower': 'float 12s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                        'pulse-slow': 'pulse 4s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'slide-in': 'slideIn 0.8s ease-out',
+                        'fade-in': 'fadeIn 1.2s ease-out',
+                        'shimmer': 'shimmer 2s infinite linear',
+                        'blob': 'blob 10s infinite',
+                    },
+                    keyframes: {
+                        ticker: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(2deg)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(176, 38, 255, 0.2)' },
+                            '100%': { boxShadow: '0 0 40px rgba(0, 243, 255, 0.4)' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateY(30px)', opacity: 0 },
+                            '100%': { transform: 'translateY(0)', opacity: 1 }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-1000px 0' },
+                            '100%': { backgroundPosition: '1000px 0' }
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            background-color: #050505; 
+            color: #ffffff;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-morphism-strong {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #00f3ff, #b026ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shimmer 3s infinite linear;
+        }
+
+        .text-gradient-static {
+            background: linear-gradient(to right, #00f3ff, #b026ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .neon-border {
+            position: relative;
+            border: 1px solid transparent;
+            background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
+                        linear-gradient(45deg, #b026ff, #00f3ff, #ff00ff) border-box;
+        }
+
+        .neon-border-hover:hover {
+            border: 1px solid transparent;
+            background: linear-gradient(#121212, #121212) padding-box,
+                        linear-gradient(45deg, #b026ff, #00f3ff, #ff00ff) border-box;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { 
+            width: 8px; 
+        }
+        ::-webkit-scrollbar-track { 
+            background: #050505; 
+        }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(to bottom, #b026ff, #00f3ff);
+            border-radius: 4px; 
+        }
+        ::-webkit-scrollbar-thumb:hover { 
+            background: linear-gradient(to bottom, #ff00ff, #00f3ff);
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: rgba(176, 38, 255, 0.3);
+            color: white;
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Gradient backgrounds */
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #050505 50%, #0a0a0a 100%);
+        }
+
+        /* Animated grid pattern */
+        .animated-grid {
+            background-image: 
+                linear-gradient(rgba(176, 38, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(176, 38, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* 3D Card effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+
+        /* Loading shimmer effect */
+        .shimmer-effect {
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.1) 50%, 
+                rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+    </style>
+</head>
+<body class="antialiased gradient-bg">
+
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-10 left-10 w-72 h-72 bg-neon-purple/10 rounded-full blur-[120px] animate-blob"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-neon-cyan/10 rounded-full blur-[120px] animate-blob" style="animation-delay: 2s"></div>
+        <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-neon-pink/10 rounded-full blur-[100px] animate-blob" style="animation-delay: 4s"></div>
+        <div class="absolute inset-0 animated-grid opacity-20"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-morphism-strong border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div class="w-10 h-10 bg-gradient-to-br from-neon-purple to-neon-cyan rounded-xl flex items-center justify-center font-bold text-black transform rotate-45 group-hover:rotate-180 transition-transform duration-500">
+                    <span class="transform -rotate-45 group-hover:rotate-45 transition-transform duration-500">K</span>
+                </div>
+                <span class="font-bold text-2xl tracking-wider ml-2 text-gradient-static">KRIPTON</span>
+                <span class="text-xs px-2 py-1 bg-neon-cyan/10 text-neon-cyan rounded-full font-mono animate-pulse">v2.0</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#" class="relative group text-gray-300 hover:text-white transition-colors">
+                    <span>Exchange</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-neon-cyan to-neon-purple group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#" class="relative group text-gray-300 hover:text-white transition-colors">
+                    <span>Markets</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-neon-cyan to-neon-purple group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#" class="relative group text-gray-300 hover:text-white transition-colors">
+                    <span>NFT</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-neon-cyan to-neon-purple group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#" class="relative group text-gray-300 hover:text-white transition-colors">
+                    <span>Learn</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-neon-cyan to-neon-purple group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#" class="relative group text-gray-300 hover:text-white transition-colors">
+                    <span>Staking</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-neon-cyan to-neon-purple group-hover:w-full transition-all duration-300"></span>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button class="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+                    <i class="fas fa-moon text-gray-400"></i>
+                    <span class="text-sm font-medium">Dark</span>
+                </button>
+                <a href="#" class="text-sm font-medium text-gray-300 hover:text-white transition-colors flex items-center gap-2">
+                    <i class="fas fa-user"></i>
+                    <span>Log In</span>
+                </a>
+                <button class="relative px-6 py-3 rounded-full bg-gradient-to-r from-neon-purple to-neon-cyan text-black font-bold hover:shadow-[0_0_30px_rgba(0,243,255,0.5)] transition-all duration-300 group overflow-hidden">
+                    <span class="relative z-10 flex items-center gap-2">
+                        <i class="fas fa-wallet"></i>
+                        Connect Wallet
+                    </span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-neon-cyan to-neon-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Crypto Ticker -->
+    <div class="fixed top-20 w-full z-40 bg-black/60 border-y border-white/5 backdrop-blur-lg overflow-hidden py-3">
+        <div class="flex animate-ticker whitespace-nowrap">
+            <div class="flex gap-12 items-center text-sm font-mono px-6">
+                <!-- Multiple copies for seamless loop -->
+                <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-orange-500/20 flex items-center justify-center">
+                        <i class="fab fa-bitcoin text-orange-500 text-xs"></i>
+                    </div>
+                    <span class="text-white">BTC</span>
+                    <span class="text-green-400 font-bold">$64,231.50</span>
+                    <span class="text-green-400/80 text-xs">(+2.4%)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center">
+                        <i class="fab fa-ethereum text-blue-500 text-xs"></i>
+                    </div>
+                    <span class="text-white">ETH</span>
+                    <span class="text-green-400 font-bold">$3,452.12</span>
+                    <span class="text-green-400/80 text-xs">(+1.8%)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">
+                        <i class="fas fa-fire text-purple-500 text-xs"></i>
+                    </div>
+                    <span class="text-white">SOL</span>
+                    <span class="text-red-400 font-bold">$145.20</span>
+                    <span class="text-red-400/80 text-xs">(-0.5%)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-blue-400/20 flex items-center justify-center">
+                        <span class="text-blue-400 font-bold text-xs">ADA</span>
+                    </div>
+                    <span class="text-white">ADA</span>
+                    <span class="text-green-400 font-bold">$0.45</span>
+                    <span class="text-green-400/80 text-xs">(+5.2%)</span>
+                </div>
+                <!-- Repeat for seamless loop -->
+                <div class="flex items-center gap-3 text-gray-600">
+                    <span>|</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-orange-500/20 flex items-center justify-center">
+                        <i class="fab fa-bitcoin text-orange-500 text-xs"></i>
+                    </div>
+                    <span class="text-white">BTC</span>
+                    <span class="text-green-400 font-bold">$64,231.50</span>
+                    <span class="text-green-400/80 text-xs">(+2.4%)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center">
+                        <i class="fab fa-ethereum text-blue-500 text-xs"></i>
+                    </div>
+                    <span class="text-white">ETH</span>
+                    <span class="text-green-400 font-bold">$3,452.12</span>
+                    <span class="text-green-400/80 text-xs">(+1.8%)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">
+                        <i class="fas fa-fire text-purple-500 text-xs"></i>
+                    </div>
+                    <span class="text-white">SOL</span>
+                    <span class="text-red-400 font-bold">$145.20</span>
+                    <span class="text-red-400/80 text-xs">(-0.5%)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative pt-44 pb-20 lg:pt-56 lg:pb-32 overflow-hidden min-h-screen flex items-center animate-fade-in">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="animate-slide-in">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-purple/10 text-neon-purple text-sm font-mono mb-8">
+                    <i class="fas fa-bolt animate-pulse"></i>
+                    <span>LIVE TRADING NOW AVAILABLE</span>
+                </div>
+                
+                <h1 class="text-6xl lg:text-7xl xl:text-8xl font-bold leading-none mb-6 tracking-tighter">
+                    <span class="text-white">TRADE THE</span><br>
+                    <span class="text-gradient">FUTURE.</span>
+                </h1>
+                
+                <p class="text-xl text-gray-300 mb-10 max-w-lg leading-relaxed font-inter">
+                    Experience the fastest decentralized exchange. Zero gas fees, instant finality, and deep liquidity across all chains. Join over 2 million traders today.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 mb-16">
+                    <button class="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-neon-purple to-neon-cyan text-black font-bold hover:shadow-[0_0_40px_rgba(176,38,255,0.5)] transition-all duration-300 overflow-hidden">
+                        <span class="relative z-10 flex items-center justify-center gap-3">
+                            <i class="fas fa-chart-line"></i>
+                            Start Trading Now
+                        </span>
+                        <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    </button>
+                    
+                    <button class="group px-8 py-4 rounded-xl border border-white/10 text-white font-medium hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-3">
+                        <i class="fas fa-play-circle text-neon-cyan"></i>
+                        <span>Watch Demo</span>
+                        <i class="fas fa-arrow-right text-neon-cyan group-hover:translate-x-2 transition-transform"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white mb-1">$42B+</div>
+                        <div class="text-sm text-gray-400 uppercase tracking-widest">Volume</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white mb-1">2M+</div>
+                        <div class="text-sm text-gray-400 uppercase tracking-widest">Users</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white mb-1">99.9%</div>
+                        <div class="text-sm text-gray-400 uppercase tracking-widest">Uptime</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-white mb-1">24/7</div>
+                        <div class="text-sm text-gray-400 uppercase tracking-widest">Support</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Trading Card -->
+            <div class="relative h-[600px] flex items-center justify-center">
+                <!-- Floating Card -->
+                <div class="relative w-full max-w-md glass-morphism-strong rounded-3xl p-8 border border-white/10 card-3d animate-float-slow shadow-2xl">
+                    <!-- Card Header -->
+                    <div class="flex justify-between items-center mb-8">
+                        <div class="text-sm font-mono text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-wallet text-neon-cyan"></i>
+                            KRIPTON WALLET
+                        </div>
+                        <div class="relative">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-r from-neon-purple to-neon-cyan flex items-center justify-center animate-pulse-slow">
+                                <i class="fas fa-shield-alt text-black"></i>
+                            </div>
+                            <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-dark-800"></div>
+                        </div>
+                    </div>
+
+                    <!-- Balance -->
+                    <div class="mb-10">
+                        <div class="text-sm text-gray-400 mb-2 flex items-center justify-between">
+                            <span>Total Balance</span>
+                            <span class="text-green-400 flex items-center gap-1">
+                                <i class="fas fa-arrow-up"></i>
+                                +2.4%
+                            </span>
+                        </div>
+                        <div class="text-5xl font-bold text-white tracking-tight mb-2">$124,592.<span class="text-gray-400">00</span></div>
+                        <div class="text-sm text-gray-500">≈ 1.24 BTC + 12.5 ETH + 145 SOL</div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="grid grid-cols-3 gap-3 mb-8">
+                        <button class="py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors flex flex-col items-center justify-center">
+                            <i class="fas fa-arrow-down text-neon-cyan mb-1"></i>
+                            <span class="text-xs">Deposit</span>
+                        </button>
+                        <button class="py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors flex flex-col items-center justify-center">
+                            <i class="fas fa-exchange-alt text-neon-purple mb-1"></i>
+                            <span class="text-xs">Swap</span>
+                        </button>
+                        <button class="py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors flex flex-col items-center justify-center">
+                            <i class="fas fa-chart-bar text-neon-pink mb-1"></i>
+                            <span class="text-xs">Trade</span>
+                        </button>
+                    </div>
+
+                    <!-- Assets List -->
+                    <div class="space-y-4 mb-8 max-h-48 overflow-y-auto pr-2 custom-scroll">
+                        <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all cursor-pointer group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center font-bold text-sm">
+                                    <i class="fab fa-bitcoin"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold">Bitcoin</div>
+                                    <div class="text-xs text-gray-400">BTC</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm font-bold">1.24</div>
+                                <div class="text-xs text-green-400">+$2,401.20</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all cursor-pointer group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center font-bold text-sm">
+                                    <i class="fab fa-ethereum"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold">Ethereum</div>
+                                    <div class="text-xs text-gray-400">ETH</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm font-bold">12.5</div>
+                                <div class="text-xs text-green-400">+$1,150.50</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all cursor-pointer group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center font-bold text-sm">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold">Solana</div>
+                                    <div class="text-xs text-gray-400">SOL</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm font-bold">145.0</div>
+                                <div class="text-xs text-green-400">+$853.20</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button class="w-full py-4 rounded-xl bg-gradient-to-r from-neon-purple to-neon-cyan text-black font-bold text-sm hover:shadow-[0_0_30px_rgba(176,38,255,0.5)] transition-all duration-300 flex items-center justify-center gap-3">
+                        <i class="fas fa-rocket"></i>
+                        Advanced Trading Dashboard
+                    </button>
+                </div>
+
+                <!-- Floating Crypto Icons -->
+                <div class="absolute -top-10 -left-10 w-20 h-20 glass-morphism rounded-2xl flex items-center justify-center animate-float-slower">
+                    <i class="fab fa-bitcoin text-3xl text-orange-500"></i>
+                </div>
+                <div class="absolute -bottom-10 -right-10 w-20 h-20 glass-morphism rounded-2xl flex items-center justify-center animate-float-slower" style="animation-delay: 2s">
+                    <i class="fab fa-ethereum text-3xl text-blue-500"></i>
+                </div>
+                <div class="absolute top-1/2 -right-16 w-16 h-16 glass-morphism rounded-2xl flex items-center justify-center animate-float-slower" style="animation-delay: 4s">
+                    <i class="fas fa-coins text-2xl text-yellow-500"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-dark-800/50 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/10 text-neon-cyan text-sm font-mono mb-6">
+                    <i class="fas fa-star"></i>
+                    <span>WHY CHOOSE KRIPTON</span>
+                </div>
+                <h2 class="text-5xl font-bold mb-6">Powerful Features for <span class="text-gradient">Modern Traders</span></h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Built with cutting-edge technology to give you the competitive edge</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-morphism p-8 rounded-3xl hover:border-neon-cyan/50 transition-all duration-300 group hover:translate-y-[-10px] card-3d">
+                    <div class="w-14 h-14 rounded-xl bg-neon-cyan/10 flex items-center justify-center text-neon-cyan mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Lightning Fast</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">100,000 TPS matching engine. Order execution in microseconds. Never miss a trade opportunity again.</p>
+                    <div class="flex items-center text-neon-cyan font-medium">
+                        <span>Learn more</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-morphism p-8 rounded-3xl hover:border-neon-purple/50 transition-all duration-300 group hover:translate-y-[-10px] card-3d">
+                    <div class="w-14 h-14 rounded-xl bg-neon-purple/10 flex items-center justify-center text-neon-purple mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Bank-Grade Security</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">Cold storage for 98% of assets. Multi-sig wallets and real-time fraud detection systems.</p>
+                    <div class="flex items-center text-neon-purple font-medium">
+                        <span>Security details</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-morphism p-8 rounded-3xl hover:border-neon-pink/50 transition-all duration-300 group hover:translate-y-[-10px] card-3d">
+                    <div class="w-14 h-14 rounded-xl bg-neon-pink/10 flex items-center justify-center text-neon-pink mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-coins text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Zero Fees</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">Trade spot pairs with 0% maker/taker fees. Stake KRON tokens to unlock premium features.</p>
+                    <div class="flex items-center text-neon-pink font-medium">
+                        <span>Fee structure</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-morphism p-8 rounded-3xl hover:border-neon-cyan/50 transition-all duration-300 group hover:translate-y-[-10px] card-3d">
+                    <div class="w-14 h-14 rounded-xl bg-neon-green/10 flex items-center justify-center text-neon-green mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Advanced Charts</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">Professional trading tools with real-time data, technical indicators, and customizable layouts.</p>
+                    <div class="flex items-center text-neon-green font-medium">
+                        <span>View charts</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-morphism p-8 rounded-3xl hover:border-neon-purple/50 transition-all duration-300 group hover:translate-y-[-10px] card-3d">
+                    <div class="w-14 h-14 rounded-xl bg-neon-yellow/10 flex items-center justify-center text-neon-yellow mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-mobile-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Mobile App</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">Trade on the go with our feature-rich mobile app. Available on iOS and Android.</p>
+                    <div class="flex items-center text-neon-yellow font-medium">
+                        <span>Download app</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-morphism p-8 rounded-3xl hover:border-neon-pink/50 transition-all duration-300 group hover:translate-y-[-10px] card-3d">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-neon-purple/10 to-neon-cyan/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-headset text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">24/7 Support</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">Get help anytime with our dedicated support team. Average response time: under 2 minutes.</p>
+                    <div class="flex items-center text-white font-medium">
+                        <span>Contact support</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="mt-20 glass-morphism-strong rounded-3xl p-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-white mb-2">24/7</div>
+                        <div class="text-gray-400">Trading Hours</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-white mb-2">150+</div>
+                        <div class="text-gray-400">Trading Pairs</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-white mb-2">0.001s</div>
+                        <div class="text-gray-400">Order Execution</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-white mb-2">$1B+</div>
+                        <div class="text-gray-400">Insurance Fund</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+            <div class="glass-morphism-strong rounded-3xl p-12 md:p-16">
+                <div class="w-20 h-20 rounded-2xl bg-gradient-to-r from-neon-purple to-neon-cyan flex items-center justify-center mx-auto mb-8">
+                    <i class="fas fa-rocket text-3xl text-black"></i>
+                </div>
+                
+                <h2 class="text-5xl font-bold mb-6">Ready to Start Your <span class="text-gradient">Trading Journey</span>?</h2>
+                <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Join millions of traders who trust Kripton for their cryptocurrency trading needs. No deposit required to explore.</p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="px-10 py-4 rounded-xl bg-gradient-to-r from-neon-purple to-neon-cyan text-black font-bold text-lg hover:shadow-[0_0_40px_rgba(176,38,255,0.5)] transition-all duration-300 group">
+                        <span class="flex items-center justify-center gap-3">
+                            <i class="fas fa-user-plus"></i>
+                            Create Free Account
+                        </span>
+                    </button>
+                    <button class="px-10 py-4 rounded-xl border border-white/10 text-white font-medium text-lg hover:bg-white/5 transition-all duration-300 group">
+                        <span class="flex items-center justify-center gap-3">
+                            <i class="fas fa-book"></i>
+                            Read Documentation
+                        </span>
+                    </button>
+                </div>
+                
+                <div class="mt-12 pt-8 border-t border-white/10">
+                    <p class="text-gray-400 mb-6">Trusted by leading institutions worldwide</p>
+                    <div class="flex flex-wrap justify-center items-center gap-10 opacity-50">
+                        <div class="text-2xl font-bold">BINANCE</div>
+                        <div class="text-2xl font-bold">COINBASE</div>
+                        <div class="text-2xl font-bold">KRAKEN</div>
+                        <div class="text-2xl font-bold">GEMINI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Background Elements -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl">
+            <div class="absolute top-0 left-0 w-64 h-64 bg-neon-purple/5 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-0 right-0 w-64 h-64 bg-neon-cyan/5 rounded-full blur-[100px]"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 bg-black/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-neon-purple to-neon-cyan rounded-xl flex items-center justify-center font-bold text-black">
+                            <span>K</span>
+                        </div>
+                        <span class="font-bold text-2xl tracking-wider">KRIPTON</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">The future of decentralized trading. Fast, secure, and fee-free.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-neon-purple/20 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-neon-cyan/20 transition-colors">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-500/20 transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Products</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Spot Trading</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Futures</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Margin Trading</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Staking</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">NFT Marketplace</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Community</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Status</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Risk Disclosure</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-gray-500 text-sm">
+                    © 2024 Kripton Exchange. All rights reserved.
+                </div>
+                <div class="flex items-center gap-6 text-sm text-gray-500">
+                    <span>English <i class="fas fa-chevron-down ml-1"></i></span>
+                    <span>USD <i class="fas fa-chevron-down ml-1"></i></span>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                        <span>System Status: <span class="text-green-500">Operational</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <button class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-neon-purple to-neon-cyan flex items-center justify-center text-black text-xl shadow-2xl hover:scale-110 transition-transform z-50">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 left-6 w-14 h-14 rounded-full glass-morphism flex items-center justify-center text-white text-xl hover:bg-white/10 transition-colors z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Simple interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effect to all cards
+            const cards = document.querySelectorAll('.card-3d');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateY = (x - centerX) / 25;
+                    const rotateX = (centerY - y) / 25;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
+            
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-slide-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements you want to animate on scroll
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
